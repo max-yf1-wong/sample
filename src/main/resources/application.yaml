@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sample
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/sample
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+logging:
+  #  level:
+  #    org:
+  #      springframework: debug
+  filter:
+    url-whitelist: /actuator/health
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [${spring.application.name:-},%X{traceId:-},%X{spanId:-}] ${PID:- } --- [%15.15t] %-40.40logger{39} [%20.20M]: %m%n"
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 500
+        readTimeout: 5000
+
+external:
+  vehicle-provider:
+    url: http://localhost:8080/
+
+swagger:
+  enabled: true
+  host: http://localhost:8080
