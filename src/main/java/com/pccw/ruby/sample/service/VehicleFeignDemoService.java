@@ -24,7 +24,6 @@ public class VehicleFeignDemoService {
 
     public List<VehicleResponseDTO> findAll() {
         // please catch the response if you want special handling for error response
-        log.info("ABCDS");
         ResponseEntity<List<VehicleProxyResponseDTO>> vehicles = vehicleProxy.getAllVehicles();
 
         List<VehicleResponseDTO> vehicleResponseDTOs =
